@@ -67,31 +67,53 @@
     </div>
 
     <h2>👔 FUNCIONÁRIOS RESPONSÁVEIS</h2>
-    <table>
-      <tr>
-        <th>Foto</th>
-        <th>Nome</th>
-        <th>Cargo</th>
-      </tr>
-      <tr>
-        <td><img src="https://cataas.com/cat?width=80&height=80" alt="Gato 1"></td>
-        <td>Bolinho</td>
-        <td>Diretor de Ronrons</td>
-      </tr>
-      <tr>
-        <td><img src="https://cataas.com/cat?width=81&height=80" alt="Gato 2"></td>
-        <td>Miauzilla</td>
-        <td>Especialista em Caixas</td>
-      </tr>
-      <tr>
-        <td><img src="https://cataas.com/cat?width=80&height=81" alt="Gato 3"></td>
-        <td>Frajola Jr.</td>
-        <td>Analista de Lasers</td>
-      </tr>
-      <tr>
-        <td><img src="https://cataas.com/cat?width=81&height=81" alt="Gato 4"></td>
-        <td>Lord Whiskers</td>
-        <td>CEO (Cat Executive Officer)</td>
+  <table>
+    <tr>
+      <th>Foto</th>
+      <th>Nome</th>
+      <th>Cargo</th>
+    </tr>
+    <tr>
+      <td><img id="gato1" alt="Gato 1" width="80" height="80"></td>
+      <td>Bolinho</td>
+      <td>Diretor de Ronrons</td>
+    </tr>
+    <tr>
+      <td><img id="gato2" alt="Gato 2" width="80" height="80"></td>
+      <td>Miauzilla</td>
+      <td>Especialista em Caixas</td>
+    </tr>
+    <tr>
+      <td><img id="gato3" alt="Gato 3" width="80" height="80"></td>
+      <td>Frajola Jr.</td>
+      <td>Analista de Lasers</td>
+    </tr>
+    <tr>
+      <td><img id="gato4" alt="Gato 4" width="80" height="80"></td>
+      <td>Lord Whiskers</td>
+      <td>CEO (Cat Executive Officer)</td>
+    </tr>
+  </table>
+
+  <script>
+    // Gera URLs aleatórias de gatos
+    const gerarUrlGato = (largura, altura) => 
+      `https://cataas.com/cat?width=${largura}&height=${altura}&unique=${Math.random()}`;
+
+    // Define os tamanhos e os elementos da tabela
+    const gatos = [
+      { id: 'gato1', w: 80, h: 80 },
+      { id: 'gato2', w: 81, h: 80 },
+      { id: 'gato3', w: 80, h: 81 },
+      { id: 'gato4', w: 81, h: 81 }
+    ];
+
+    // Aplica os gatos na página
+    gatos.forEach(g => {
+      const img = document.getElementById(g.id);
+      img.src = gerarUrlGato(g.w, g.h);
+    });
+  </script>
       </tr>
     </table>
 
