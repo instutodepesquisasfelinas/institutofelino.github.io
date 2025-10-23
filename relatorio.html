@@ -95,12 +95,9 @@
     </tr>
   </table>
 
-  <script>
-    // Gera URLs aleatórias de gatos
-    const gerarUrlGato = (largura, altura) => 
-      `https://cataas.com/cat?width=${largura}&height=${altura}&unique=${Math.random()}`;
+  <button id="trocar">Trocar gatos 🐱🔄</button>
 
-    // Define os tamanhos e os elementos da tabela
+  <script>
     const gatos = [
       { id: 'gato1', w: 80, h: 80 },
       { id: 'gato2', w: 81, h: 80 },
@@ -108,11 +105,35 @@
       { id: 'gato4', w: 81, h: 81 }
     ];
 
-    // Aplica os gatos na página
-    gatos.forEach(g => {
-      const img = document.getElementById(g.id);
-      img.src = gerarUrlGato(g.w, g.h);
-    });
+    const gerarUrlGato = (largura, altura) =>
+      `https://cataas.com/cat?width=${largura}&height=${altura}&unique=${Math.random()}`;
+
+    function carregarGatos() {
+      let dados = localStorage.getItem('gatos');
+      if (!dados) {
+        // Gera novas URLs e salva
+        dados = gatos.map(g => gerarUrlGato(g.w, g.h));
+        localStorage.setItem('gatos', JSON.stringify(dados));
+      } else {
+        dados = JSON.parse(dados);
+      }
+
+      // Aplica as imagens na tabela
+      gatos.forEach((g, i) => {
+        document.getElementById(g.id).src = dados[i];
+      });
+    }
+
+    function trocarGatos() {
+      const novas = gatos.map(g => gerarUrlGato(g.w, g.h));
+      localStorage.setItem('gatos', JSON.stringify(novas));
+      carregarGatos();
+    }
+
+    document.getElementById('trocar').addEventListener('click', trocarGatos);
+
+    // Carrega ao abrir a página
+    carregarGatos();
   </script>
       </tr>
     </table>
