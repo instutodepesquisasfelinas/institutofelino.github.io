@@ -135,6 +135,48 @@
     // Carrega ao abrir a página
     carregarGatos();
   </script>
+  </table>
+
+  <button id="trocar">Trocar gatos 🐱🔄</button>
+
+  <script>
+    const gatos = [
+      { id: 'gato1', w: 80, h: 80 },
+      { id: 'gato2', w: 81, h: 80 },
+      { id: 'gato3', w: 80, h: 81 },
+      { id: 'gato4', w: 81, h: 81 }
+    ];
+
+    const gerarUrlGato = (largura, altura) =>
+      `https://cataas.com/cat?width=${largura}&height=${altura}&unique=${Math.random()}`;
+
+    function carregarGatos() {
+      let dados = localStorage.getItem('gatos');
+      if (!dados) {
+        // Gera novas URLs e salva
+        dados = gatos.map(g => gerarUrlGato(g.w, g.h));
+        localStorage.setItem('gatos', JSON.stringify(dados));
+      } else {
+        dados = JSON.parse(dados);
+      }
+
+      // Aplica as imagens na tabela
+      gatos.forEach((g, i) => {
+        document.getElementById(g.id).src = dados[i];
+      });
+    }
+
+    function trocarGatos() {
+      const novas = gatos.map(g => gerarUrlGato(g.w, g.h));
+      localStorage.setItem('gatos', JSON.stringify(novas));
+      carregarGatos();
+    }
+
+    document.getElementById('trocar').addEventListener('click', trocarGatos);
+
+    // Carrega ao abrir a página
+    carregarGatos();
+  </script>
       </tr>
     </table>
 
